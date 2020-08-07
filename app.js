@@ -7,6 +7,7 @@ const result_p = document.querySelector(".result > p");
 const rock_div = document.getElementById("r");
 const paper_div = document.getElementById("p");
 const scissors_div = document.getElementById("s");
+const reset_div = document.getElementById("reset-btn");
 
 function getComputerChoice() {
     const choices = ['r', 'p', 's'];
@@ -74,6 +75,33 @@ function game(userChoice){
     }
     console.log("user choice => " + userChoice);
     console.log("computer choice => " + computerChoice);
+    if (userScore === 10) {
+        console.log("clear");
+        removeElement("score-board");
+        replaceElement("result", "The game is over! \n You Won!");
+        removeElement("choices");
+        removeElement("action-message");
+        replaceElement("endgame", "Play again?");
+    } else if (computerScore === 10) {
+        console.log("clear");
+        removeElement("score-board");
+        replaceElement("result", "The game is over! \n You lost... :(");
+        removeElement("choices");
+        removeElement("action-message");
+        replaceElement("endgame", "Try again?");
+    }
+}
+
+function reset() {
+    window.location.href = "https://alextang21.github.io/rock-paper-scissors/";
+}
+
+function replaceElement(elementID, replacement) {
+    document.getElementById(elementID).innerHTML = replacement;
+}
+
+function removeElement(elementID) {
+    document.getElementById(elementID).remove();
 }
 
 function main() {
@@ -87,6 +115,9 @@ function main() {
 
     scissors_div.addEventListener('click', function() {
         game("s");
+    })
+    reset_div.addEventListener('click', function() {
+        reset();
     })
 }
 
